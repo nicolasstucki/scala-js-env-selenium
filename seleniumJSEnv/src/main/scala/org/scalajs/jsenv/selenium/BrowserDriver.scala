@@ -1,6 +1,10 @@
 package org.scalajs.jsenv.selenium
 
+<<<<<<< HEAD
 import java.{util => ju}
+=======
+import java.io.File
+>>>>>>> wip
 import java.util.concurrent.TimeUnit
 
 import org.openqa.selenium.remote._
@@ -22,17 +26,16 @@ abstract class BrowserDriver {
   }
 
   /** Starts a new instance of the browser. */
-  final def start(): Unit = synchronized {
+  def start(): Unit = synchronized {
     assert(!isOpened, "start() may only start one instance at a time.")
     webDriver = newDriver()
     webDriver.manage().timeouts().setScriptTimeout(-1, TimeUnit.SECONDS)
   }
 
   /** Closes the instance of the browser. */
-  final def close(): Unit = synchronized {
+  def close(): Unit = synchronized {
     if (isOpened) {
       webDriver.close()
-      afterClose()
       webDriver = null
     }
   }
@@ -63,8 +66,6 @@ abstract class BrowserDriver {
   }
 
   protected def newDriver(): RemoteWebDriver
-
-  protected def afterClose(): Unit = ()
 }
 
 object BrowserDriver {
